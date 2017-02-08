@@ -1,0 +1,19 @@
+1. Classier command line
+The general syntax for running WEKA from the command line is:
+java -cp *weka.jar path* *weka classier* *classier options*
+The path to the jar le on CDF is: /u/cs401/WEKA/weka.jar. The three classiers you will use are:
+weka.classiers.functions.SMO (for SVMs)
+weka.classiers.bayes.NaiveBayes (for nave Bayes)
+weka.classiers.trees.J48 (for decision trees)
+The key options are:
+-t *ar le* (Choose the training le)
+-x *X* (Use cross-validation, X is the number of folds; this is not useful here)
+-T *ar le* (Choose the testing le, for section 3.2)
+-no-cv (Do not perform cross-validation)
+-o (Do not output the classier. Use this option for your outputs!)
+A full list of options are available at http://www.cs.waikato.ac.nz/~remco/weka bn/node13.html, but
+this is all you need to complete this assignment.
+
+
+java -jar F:/University\ Material/2016-2017/Winter/CSC401/Assignment/A1/WEKA/weka.jar weka.classifiers.functions.SMO -t F:/University\ Material/2016-2017/Winter/CSC401/Assignment/A1/output/train.arff -T F:/University\ Material/2016-2017/Winter/CSC401/Assignment/A1/output/test.arff
+
