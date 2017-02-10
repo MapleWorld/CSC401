@@ -1,0 +1,72 @@
+
+SMO
+
+Kernel used:
+  Linear Kernel: K(x,y) = <x,y>
+
+Classifier for classes: 0, 4
+
+BinarySMO
+
+Machine linear: showing attribute weights, not support vectors.
+
+        -3.0606 * (normalized) first_person_pronouns
+ +       4.9102 * (normalized) second_person_pronouns
+ +       0.1329 * (normalized) 3rd_person_pronoun
+ +       1.0777 * (normalized) future_tense_verbs
+ +       2.5627 * (normalized) commas
+ +       2.0333 * (normalized) colons
+ +       4.3293 * (normalized) dashes
+ +       1.4719 * (normalized) parentheses
+ +      -1.8096 * (normalized) ellipses
+ +      -0.4914 * (normalized) slang_acronyms
+ +       0.5664 * (normalized) upper_case_words
+ +      -1.2413 * (normalized) sentence_length
+ +       6.8303 * (normalized) token_length
+ +       0.8566 * (normalized) number_sentences
+ -       0.8803
+
+Number of kernel evaluations: 3991212 (60.213% cached)
+
+
+
+Time taken to build model: 1.18 seconds
+Time taken to test model on training data: 0.14 seconds
+
+=== Error on training data ===
+
+Correctly Classified Instances       12017               60.085  %
+Incorrectly Classified Instances      7983               39.915  %
+Kappa statistic                          0.2017
+Mean absolute error                      0.3992
+Root mean squared error                  0.6318
+Relative absolute error                 79.83   %
+Root relative squared error            126.3566 %
+Total Number of Instances            20000     
+
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+ 6151 3849 |    a = 0
+ 4134 5866 |    b = 4
+
+
+=== Error on test data ===
+
+Correctly Classified Instances         182               50.6964 %
+Incorrectly Classified Instances       177               49.3036 %
+Kappa statistic                          0.013 
+Mean absolute error                      0.493 
+Root mean squared error                  0.7022
+Relative absolute error                 98.6072 %
+Root relative squared error            140.4331 %
+Total Number of Instances              359     
+
+
+=== Confusion Matrix ===
+
+  a  b   <-- classified as
+ 84 93 |  a = 0
+ 84 98 |  b = 4
+

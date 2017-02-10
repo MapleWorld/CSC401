@@ -152,6 +152,9 @@ def token_length(token_split):
          if x[1] not in candidate_words:
              token_lengths.append(len(x[0]))
              
+    if (len(token_lengths) == 0):
+        return 0
+        
     return sum(token_lengths) / float(len(token_lengths))
 
 # Number of sentences (feat20)
@@ -185,12 +188,9 @@ def feature_extraction(tweet, class_label):
     feature_list.append(token_length(sentence_list))
     feature_list.append(number_sentences(tweet))
     
-    print feature_list
-    
     output_str = ', '.join(str(x) for x in feature_list) 
     output_str += ", " + str(class_label) + "\n"
     
-    print output_str
     return output_str
     
     
@@ -224,10 +224,62 @@ def buildarff(input_file, output_file, max_tweet_per_class):
         class_counters[class_label] += 1;
         output_file.write(output_str)
     
-    print "Class Counter:" + class_counters
+    # print "Class Counter:" + class_counters
+    
+# Manually write the attribute and relation header to the output file
+def write_attributes(output_file):
+    file_name = os.path.basename(output_file.name)
+    output_file.write("@relation " + file_name + "\n")
+    output_file.write("@attribute first_person_pronouns numeric\n")
+    output_file.write("@attribute second_person_pronouns numeric\n")
+    output_file.write("@attribute 3rd_person_pronoun numeric\n")
+    output_file.write("@attribute third_person_pronouns numeric\n")
+    output_file.write("@attribute past_tense_verbs numeric\n")
+    output_file.write("@attribute future_tense_verbs numeric\n")
+    output_file.write("@attribute commas numeric\n")
+    output_file.write("@attribute colons numeric\n")
+    output_file.write("@attribute dashes numeric\n")
+    output_file.write("@attribute parentheses numeric\n")
+    output_file.write("@attribute ellipses numeric\n")
+    output_file.write("@attribute common_nouns numeric\n")
+    output_file.write("@attribute proper_nouns numeric\n")
+    output_file.write("@attribute adverbs numeric\n")
+    output_file.write("@attribute wh_words numeric\n")
+    output_file.write("@attribute slang_acronyms numeric\n")
+    output_file.write("@attribute upper_case_words numeric\n")
+    output_file.write("@attribute sentence_length numeric\n")
+    output_file.write("@attribute token_length numeric\n")
+    output_file.write("@attribute number_sentences numeric\n\n")
+    output_file.write("@attribute class {0, 4}\n\n")
+    output_file.write("@data\n")
+
+# For part 3.2 of the assignment
+# Creating training output file with dataset ranging from 500 - 10000
+def part_three_two():
+    
+    max_tweet_per_class = 500
+    input_file_name = "./output/train.twt"
+    
+    while (max_tweet_per_class <= 10000):
+
+        output_file_name = "./output/3.2/train" + str(max_tweet_per_class) + ".arff"
+    
+        with open(input_file_name, "r") as input:
+            with open(output_file_name, "w") as output:
+                write_attributes(output)
+                buildarff(input, output, max_tweet_per_class)
+                
+        max_tweet_per_class = max_tweet_per_class + 500
+        
+    
     
     
 if __name__ == "__main__":
+    
+    #input_file_name = "./output/test.twt"
+    #output_file_name = "./output/test.arff"
+    #input_file_name = "./output/train.twt"
+    #output_file_name = "./output/train.arff"
     
     max_tweet_per_class = float("inf")
     
@@ -242,12 +294,9 @@ if __name__ == "__main__":
         print "Invalid number of parameters"
         sys.exit()
 
-    #input_file_name = "./output/test_output.csv"
-    input_file_name = "./output/train.twt"
-    output_file_name = "./output/train.arff"
-
     with open(input_file_name, "r") as input:
         with open(output_file_name, "w") as output:
+            write_attributes(output)
             buildarff(input, output, max_tweet_per_class)
     
     
