@@ -15,6 +15,7 @@ Partition $i:" >> $output_file
     tail -n 5 $train_file_path$i.txt >> $output_file
     output=`tail -n 3 $train_file_path$i.txt`
     output_arr=($output)
+    
     aa=${output_arr[0]}
     ab=${output_arr[1]}
     ba=${output_arr[6]}

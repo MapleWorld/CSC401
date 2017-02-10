@@ -298,7 +298,7 @@ if __name__ == "__main__":
         with open(output_file_name, "w") as output:
             write_attributes(output)
             buildarff(input, output, max_tweet_per_class)
-    
+
     
     
     

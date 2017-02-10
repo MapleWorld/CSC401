@@ -180,7 +180,9 @@ if __name__ == "__main__":
         print "Invalid number of parameters"
         sys.exit()
 
-
+    # File path
+    # /u/cs401/A1/tweets/testdata.manualSUBSET.2009.06.14.csv
+    # /u/cs401/A1/tweets/training.1600000.processed.noemoticon.csv
 
 
 
