@@ -204,6 +204,8 @@ def buildarff(input_file, output_file, max_tweet_per_class):
     
     if max_tweet_per_class >= 20000:
         max_tweet_per_class = float("inf")
+    elif max_tweet_per_class is None:
+        max_tweet_per_class = float("inf")
         
     for line in input_file: 
         if line.startswith('<A='):
@@ -299,6 +301,8 @@ if __name__ == "__main__":
             write_attributes(output)
             buildarff(input, output, max_tweet_per_class)
 
+    # python buildarff.py train.twt train.arff
+    # python buildarff.py test.twt test.arff
     
     
     

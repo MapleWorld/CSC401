@@ -14,7 +14,7 @@ def main():
     tweet_list = [[],[], [], [], []]
     
     # Find the index where the tweet starts in the arff file
-    with open("./output/train.arff", "r") as input:
+    with open("./train.arff", "r") as input:
         for row in input:
             if not row.startswith('@') and not row.startswith('\n'):
                 break
