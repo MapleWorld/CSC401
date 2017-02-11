@@ -1,3 +1,14 @@
+============ Comment ==============
+
+As seen from that data below, second-person pronouns and first-person pronouns
+retain their importance at both output with very large difference in training set size.
+
+A possible explanation for why these two features retains their importances across different training 
+set sizes might have to do with the way how english are constructured and spoke on a daily level.
+First and second person pronouns are often used on a regular level for almost everything, whether it is
+addressing the problem, targeting the audience, or stating their arguments. Therefore, it retains
+its importance regardless of the data sizes.
+
 === infogain.sh for train500.arff ===
 === Attribute Selection on all input data ===
 

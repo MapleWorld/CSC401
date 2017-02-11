@@ -1,8 +1,9 @@
 #!/bin/bash
 
+file_type="bayes"
 prefix="./output/3.4/"
-train_file_path="./output/3.4/single_partition_analysis_output_bayes_"
-output_file=${prefix}3.4output.txt
+train_file_path="./output/3.4/single_partition_analysis_output_"$file_type"_"
+output_file=${prefix}"3.4output_"$file_type".txt"
 
 start=0
 end=10
@@ -16,6 +17,7 @@ Partition $i:" >> $output_file
     output=`tail -n 3 $train_file_path$i.txt`
     output_arr=($output)
     
+
     aa=${output_arr[0]}
     ab=${output_arr[1]}
     ba=${output_arr[6]}
@@ -27,6 +29,8 @@ Partition $i:" >> $output_file
     rec_a=$(awk -v aa=$aa -v ab=$ab 'BEGIN { print aa / (aa + ab) }')
     rec_b=$(awk -v bb=$bb -v ba=$ba 'BEGIN { print bb / (bb + ba) }')
 
+    accuracy_lst[i]=$acc
+
     echo Accuracy - $acc % >> $output_file
     echo "Precision - A: $prec_a %
             B: $prec_b %" >> $output_file
@@ -34,3 +38,12 @@ Partition $i:" >> $output_file
          B: $rec_b %" >> $output_file
     echo $acc,
 done
+
+echo "" >> $output_file
+echo -n "[" >> $output_file
+for ((i=$start; i<$end; i++))
+do
+    echo -n "${accuracy_lst[i]}, " >> $output_file
+done
+echo -n "]" >> $output_file
+ 

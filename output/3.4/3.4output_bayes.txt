@@ -129,21 +129,4 @@ Precision - A: 0.569476 %
 Recall - A: 0.75 %
          B: 0.433 %
 
-
-============ Comment ==============
-
-The 10-fold cross-validation results are as follows:
-
-Bayes: [0.6095, 0.5945, 0.571, 0.561, 0.582, 0.596, 0.591, 0.583, 0.6015, 0.5915]
-SVM: [0.622, 0.5955, 0.587, 0.568, 0.5885, 0.599, 0.603, 0.596, 0.6225, 0.6145]
-Decision Tree: [0.5845, 0.579, 0.574, 0.5645, 0.599, 0.589, 0.608, 0.594, 0.587, 0.587]
-
-Bayes - SVM                P value: 0.000727899315147
-Bayes - Decision Tree      P value: 0.747841511286
-SVM   - Decision Tree      P value: 0.0336308810243
-
-As shown by the p value, Bayes vs SVM, and SVM vs Decision tree has a very low p value, 
-meaning they are statistically different in values.
-
-However, the p value is relatively high for the Bayes vs Decision tree pair, meaning they shared
-more common values, and can't be resulted by coincidents.
+[0.6095, 0.5945, 0.571, 0.561, 0.582, 0.596, 0.591, 0.583, 0.6015, 0.5915, ]

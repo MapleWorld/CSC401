@@ -1,0 +1,132 @@
+
+
+Partition 0:
+
+   a   b   <-- classified as
+ 610 390 |   a = 0
+ 441 559 |   b = 4
+
+Accuracy - 0.5845 %
+Precision - A: 0.5804 %
+            B: 0.589041 %
+Recall - A: 0.61 %
+         B: 0.559 %
+
+
+Partition 1:
+
+   a   b   <-- classified as
+ 607 393 |   a = 0
+ 449 551 |   b = 4
+
+Accuracy - 0.579 %
+Precision - A: 0.574811 %
+            B: 0.583686 %
+Recall - A: 0.607 %
+         B: 0.551 %
+
+
+Partition 2:
+
+   a   b   <-- classified as
+ 602 398 |   a = 0
+ 454 546 |   b = 4
+
+Accuracy - 0.574 %
+Precision - A: 0.570076 %
+            B: 0.57839 %
+Recall - A: 0.602 %
+         B: 0.546 %
+
+
+Partition 3:
+
+   a   b   <-- classified as
+ 588 412 |   a = 0
+ 459 541 |   b = 4
+
+Accuracy - 0.5645 %
+Precision - A: 0.561605 %
+            B: 0.567681 %
+Recall - A: 0.588 %
+         B: 0.541 %
+
+
+Partition 4:
+
+   a   b   <-- classified as
+ 648 352 |   a = 0
+ 450 550 |   b = 4
+
+Accuracy - 0.599 %
+Precision - A: 0.590164 %
+            B: 0.609756 %
+Recall - A: 0.648 %
+         B: 0.55 %
+
+
+Partition 5:
+
+   a   b   <-- classified as
+ 608 392 |   a = 0
+ 430 570 |   b = 4
+
+Accuracy - 0.589 %
+Precision - A: 0.585742 %
+            B: 0.592516 %
+Recall - A: 0.608 %
+         B: 0.57 %
+
+
+Partition 6:
+
+   a   b   <-- classified as
+ 658 342 |   a = 0
+ 442 558 |   b = 4
+
+Accuracy - 0.608 %
+Precision - A: 0.598182 %
+            B: 0.62 %
+Recall - A: 0.658 %
+         B: 0.558 %
+
+
+Partition 7:
+
+   a   b   <-- classified as
+ 627 373 |   a = 0
+ 439 561 |   b = 4
+
+Accuracy - 0.594 %
+Precision - A: 0.58818 %
+            B: 0.600642 %
+Recall - A: 0.627 %
+         B: 0.561 %
+
+
+Partition 8:
+
+   a   b   <-- classified as
+ 611 389 |   a = 0
+ 437 563 |   b = 4
+
+Accuracy - 0.587 %
+Precision - A: 0.583015 %
+            B: 0.591387 %
+Recall - A: 0.611 %
+         B: 0.563 %
+
+
+Partition 9:
+
+   a   b   <-- classified as
+ 660 340 |   a = 0
+ 486 514 |   b = 4
+
+Accuracy - 0.587 %
+Precision - A: 0.575916 %
+            B: 0.601874 %
+Recall - A: 0.66 %
+         B: 0.514 %
+
+[0.5845, 0.579, 0.574, 0.5645, 0.599, 0.589, 0.608, 0.594, 0.587, 0.587, ]

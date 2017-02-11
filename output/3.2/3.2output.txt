@@ -23,3 +23,15 @@ N            Correct Preds     Accuracy
 9000         188               52.3677 %
 9500         189               52.6462 %
 10000        187               52.0891 %
+
+============ Comment ==============
+As seen from the data above, the accuracy of the classifier 
+slowly increases as the number of training size increases, but
+it became less apparent for training sample size > 4000, and stabilized at around 52%.
+
+Reasons why that could have caused this:
+Incorrect use of grammars and words may interfere with the classifier learning rate, causing it to stall.
+Unknown features that are not included in the 20 features extraction, preventing it from further learning.
+Redundant data with similar content, which provides no further information to improve the accuracy and learning rate.
+Missing/Incorrectly label and tags of the sample data, preventing from correctly classifiying the data.
+
