@@ -42,7 +42,7 @@ def twtt4(tweet):
 def create_abbrev_set():
     abbrev_set = set()
     
-    with open('./language/abbrev.english', 'rb') as abbrevs:
+    with open('./abbrev.english', 'rb') as abbrevs:
         for line in abbrevs:
             abbrev_set.add(line.strip())
             
@@ -175,7 +175,7 @@ if __name__ == "__main__":
         sys.exit()
 
     # Program arguments
-    # python twtt.py /u/cs401/A1/tweets/testdata.manualSUBSET.2009.06.14.csv 999768327 train.twt
+    # python twtt.py /u/cs401/A1/tweets/testdata.manualSUBSET.2009.06.14.csv 999768327 test.twt
     # python twtt.py /u/cs401/A1/tweets/training.1600000.processed.noemoticon.csv 999768327 train.twt
 
 
