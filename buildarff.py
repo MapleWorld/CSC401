@@ -33,10 +33,23 @@ Number of sentences (feat20)
 
 '''
 
-def split_tweet_into_sentences(tweet):
-    tokens = [x.strip().split(' ') for x in tweet]
-    return [y.split('/') for x in tokens for y in x]
+# Divide the words by space into a list of token
+# Where each token consists of a word and its tag
+def split_tweet_into_sentences(tweets):
     
+    tokens = []
+    for x in tweets:
+        tokens.append(x.strip().split(' '))
+    
+    result_lst = []
+    
+    for x in tokens:
+        for y in x:
+            result_lst.append(y.split('/'))
+            
+    return result_lst
+    
+# Count the number of word that matches the given candidate word list
 def word_counter(token_split, candidate_words, index):
     
     count = 0
@@ -47,26 +60,32 @@ def word_counter(token_split, candidate_words, index):
             
     return count
     
+# Count the number of word that matches first person pronouns
 def first_person_pronouns(token_split):
     candidate_words = ['i', 'me', 'my', 'mine', 'we', 'us', 'our', 'ours']
     return word_counter(token_split, candidate_words, 0)
 
+# Count the number of word that matches second person pronouns
 def second_person_pronouns(token_split):
     candidate_words = ['you', 'your', 'yours', 'u', 'ur', 'urs']
     return word_counter(token_split, candidate_words, 0)
     
+# Count the number of word that matches third person pronouns
 def third_person_pronouns(token_split):
     candidate_words = ['he', 'him', 'his', 'she', 'her', 'hers', 'it', 'its', 'they', 'them', 'their', 'theirs']
     return word_counter(token_split, candidate_words, 0)
 
+# Count the number of word that matches that counjunction tag
 def coordinating_conjunctions(token_split):
     candidate_words = ['CC']
     return word_counter(token_split, candidate_words, 1)
 
+# Count the number of word that matches the past tense verbs tag
 def past_tense_verbs(token_split):
     candidate_words = ['VBD']
     return word_counter(token_split, candidate_words, 1)
 
+# Count the number of word that matches the past future tense verbs
 def future_tense_verbs(token_split):
     candidate_words = ["'ll", 'will', 'gonna']
     count = word_counter(token_split, candidate_words, 0)
@@ -80,44 +99,52 @@ def future_tense_verbs(token_split):
     
     return count
 
+# Count the number of commas in the given token list
 def commas(token_split):
     candidate_words = [',']
     return word_counter(token_split, candidate_words, 1)
 
+# Count the number of colons in the given token list
 def colons(token_split):
     candidate_words = [':', ';']
     return word_counter(token_split, candidate_words, 0)
     
+# Count the number of dashes in the given token list
 def dashes(token_split):
     candidate_words = ['-']
     return word_counter(token_split, candidate_words, 0)
 
+# Count the number of parantheses in the given token list
 def parantheses(token_split):
     candidate_words = ['(', ')']
     return word_counter(token_split, candidate_words, 0)
 
+# Count the number of ellipses in the given token list
 def ellipses(token_split):
     candidate_words = ['...']
     return word_counter(token_split, candidate_words, 0)
     
+# Count the number of common nouns in the given token list
 def common_nouns(token_split):
     candidate_words = ['NN', 'NNS']
     return word_counter(token_split, candidate_words, 1)
 
+# Count the number of proper nouns in the given token list
 def proper_nouns(token_split):
     candidate_words = ['NNP', 'NNPS']
     return word_counter(token_split, candidate_words, 1)
 
-
+# Count the number of adverbs in the given token list
 def adverbs(token_split):
     candidate_words = ['RB', 'RBR', 'RBS']
     return word_counter(token_split, candidate_words, 1)
 
-
+# Count the number of words that starts with wh in the given token list
 def wh_words(token_split):
     candidate_words = ['WDT', 'WP', 'WP$', 'WRB']
     return word_counter(token_split, candidate_words, 1)
-    
+   
+# Count the number of words that are slang acronyms in the given token list
 def slang_acronyms(token_split):
     candidate_words = ['smh', 'fwb',  'lmfao', 'lmao', 'lms', 'tbh',  'rofl', 'wtf',
                        'bff', 'wyd',  'lylc',  'brb',  'atm', 'imao', 'sml',  'btw',
@@ -161,7 +188,7 @@ def token_length(token_split):
 def number_sentences(sentences):
     return len(sentences)
     
-    
+# Helper function to execute all feature extractions for the given tweet and class label
 def feature_extraction(tweet, class_label):
     
     sentence_list = split_tweet_into_sentences(tweet)
@@ -193,20 +220,20 @@ def feature_extraction(tweet, class_label):
     
     return output_str
     
-    
-    
+# Build the arff file by reading the input file content
+# Perform feature extraction and dump the content to output file
 def buildarff(input_file, output_file, max_tweet_per_class):
     
     tweet = []
     output_str = ""
     class_label = 0
-    class_counters = [-1, 0, 0, 0, 0]
+    class_counters = [0, 0, 0, 0, 0]
     
     if max_tweet_per_class >= 20000:
         max_tweet_per_class = float("inf")
     elif max_tweet_per_class is None:
         max_tweet_per_class = float("inf")
-        
+    
     for line in input_file: 
         if line.startswith('<A='):
             if tweet != []:
@@ -222,11 +249,9 @@ def buildarff(input_file, output_file, max_tweet_per_class):
             tweet.append(line)
             
     output_str = feature_extraction(tweet, class_label)
-    if class_counters[class_label] < max_tweet_per_class:
+    if class_counters[class_label] <= max_tweet_per_class:
         class_counters[class_label] += 1;
         output_file.write(output_str)
-    
-    # print "Class Counter:" + class_counters
     
 # Manually write the attribute and relation header to the output file
 def write_attributes(output_file):
@@ -273,15 +298,7 @@ def part_three_two():
                 
         max_tweet_per_class = max_tweet_per_class + 500
         
-    
-    
-    
 if __name__ == "__main__":
-    
-    #input_file_name = "./output/test.twt"
-    #output_file_name = "./output/test.arff"
-    #input_file_name = "./output/train.twt"
-    #output_file_name = "./output/train.arff"
     
     max_tweet_per_class = float("inf")
     
@@ -291,7 +308,7 @@ if __name__ == "__main__":
     elif len(sys.argv) == 4:
         input_file_name = sys.argv[1]
         output_file_name = sys.argv[2]  
-        max_tweet_per_class = sys.argv[3]
+        max_tweet_per_class = int(sys.argv[3])
     else:
         print "Invalid number of parameters"
         sys.exit()

@@ -11,7 +11,6 @@ from HTMLParser import HTMLParser
 # Remove html tags and attributes
 def twtt1(tweet):
     new_tweet = re.sub(r'<[^>]+>', '', tweet).strip()
-    #print "twtt1: " + new_tweet
     return new_tweet
 
 # Replace html name with ASCII    
@@ -24,7 +23,7 @@ def twtt2(tweet):
             new_tweet += char
             
     new_tweet = parser.unescape(new_tweet)
-    #print "twtt2: " + new_tweet
+    
     return new_tweet
   
 # Remove URL
@@ -38,7 +37,6 @@ def twtt3(tweet):
 def twtt4(tweet):
     new_tweet = re.sub(r'@\S+', '', tweet, 1).strip()
     new_tweet = re.sub(r'#\S+', '', new_tweet).strip()
-    #print "twtt4: " + new_tweet
     return new_tweet
 
 def create_abbrev_set():
@@ -88,7 +86,6 @@ def twtt5(tweet):
     if (len(sentences) == 0):
         sentences = [tweet]
     
-    #print "twtt5:" + ', '.join(sentences) 
     return sentences
  
 def twtt7(tweet):
@@ -104,7 +101,6 @@ def twtt7(tweet):
     # 4. Join e.g.
     sentence_4 = re.sub(r" e . g . ", r" e.g. ", sentence_3)
     
-    #print "twtt7: " + sentence_4
     return sentence_4
 
 # Tag Sentence
@@ -114,7 +110,6 @@ def twtt8(tweet, tagger):
     word_list = tweet.split(" ")
     tag_list = tagger.tag(word_list)
     result = ' '.join([x[0] + "/" + x[1] for x in zip(word_list, tag_list)])
-    #print "twtt8: " + result
     return result
 
 # Before each tweet is demarcation A=# in <> which occurs on its own line
@@ -123,7 +118,6 @@ def twtt8(tweet, tagger):
 def twtt9(tweet, class_type):
     prepend = "<A={}>".format(class_type)
     new_line = [prepend] + tweet
-    #print new_line
     return new_line
 
 ##### Take in an input file name, and an output file, and a student ID.
