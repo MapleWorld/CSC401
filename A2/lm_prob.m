@@ -49,22 +49,23 @@ words = strsplit(' ', sentence);
 % TODO: the student implements the following
 logProb = 0;
 for i=1:length(words)-1
-    % First, get our counts
-    if isfield(LM.bi, words{i}) && isfield(LM.bi.(words{i}), words{i+1})
-        numcount = LM.bi.(words{i}).(words{i+1});
-    else
-        numcount = 0;
-    end
-    
+    % First count the number of uni words
     if isfield(LM.uni, words{i})
-        dencount = LM.uni.(words{i});
+        den_count = LM.uni.(words{i});
     else
-        dencount = 0;
+        den_count = 0;
     end
     
-    % Next, compute numerator and denominator and add
-    num = numcount + delta;
-    den = dencount + delta * vocabSize;
+    % Second  count the number of bi words
+    if isfield(LM.bi, words{i}) && isfield(LM.bi.(words{i}), words{i+1})
+        num_count = LM.bi.(words{i}).(words{i+1});
+    else
+        num_count = 0;
+    end
+
+    % Last, compute numerator and denominator and add them
+    num = num_count + delta;
+    den = den_count + delta * vocabSize;
     if den == 0 && num == 0
         logProb = -Inf;
         % Once the probability is 0, it will stay 0

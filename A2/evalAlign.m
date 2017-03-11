@@ -9,12 +9,12 @@ trainDir     = './Training';%'/u/cs401/A2_SMT/data/Hansard/Training/';
 testDir      = './Testing/Task5';%'/u/cs401/A2_SMT/data/Hansard/Testing/Task5';
 fn_LME       = './part5_LM_e.mat';
 fn_LMF       = './part5_LM_f.mat';
-fn_AM        = './part5_AM.mat';
+fn_AM        = './am.mat';
 lm_type      = '';
 delta        = 0.01;
 vocabSize    = 0;
 numSentences = 1000;
-sizes        = {10000};%1000, 10000, 15000, 30000, 100000};
+sizes        = {1000};%{1000, 10000, 15000, 30000, 100000};
 
 % Train your language models. This is task 2 which makes use of task 1
 %LME = lm_train( trainDir, 'e', fn_LME );

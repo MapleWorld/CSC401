@@ -3,8 +3,41 @@
 
 Trained on : 1000 sentences
 Average accuracy: 0.175899
-
-
+10 Iterations
 
 Trained on : 10000 sentences
 Average accuracy: 0.213719
+10 Iterations
+
+Trained on : 15000 sentences
+Average accuracy: 0.210083
+10 Iterations
+
+Trained on : 30000 sentences
+Average accuracy: 0.213535
+
+Evaluation method:
+The evaluation of a translation was done by using the following metric,
+which counts the number of matching words at each position of a translated sentence 
+and the corresponding supplied English sentence. 
+
+The accuracy was then calculated by:
+    (# of matching words at each position)/(length of translated sentence - 2),
+    where (-2) correspond to removing SENTSTART and SENTEND markers.
+
+Then the Average Accuracy was calculated by summing the
+accuracy of translation for each sentence and divide by 25 (total number ofsentences).
+
+As the data show, this experiements result in a range of accuracy ranging from 17.5% to 21%.
+The difference between the accuracy produced on the 10k and the 30k sentences are minimum, hence,
+the evaluation method used is not a very good model to perform the translation. 
+
+One problem I think with this evaluation is that depends heavily on the correct index of the words
+bewteen the original and translated files, which can be problematic, as messing up the index by one
+could ruin the whole sentence.
+
+Another problem is the grammar, different language might have different grammar structure, which
+will impact the order of the sentence, and result incorrect translation due to index matching. 
+
+In conclusion, the evaluation of accuracy for translation is not a good model, due to grammar structure,
+and heavy dependence on word positions, and doesn't represent the actual quality of the translation.     
