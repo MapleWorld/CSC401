@@ -1,0 +1,10 @@
+/u/cs401/A2_SMT/data/Hansard/Testing/Task5.e
+/u/cs401/A2_SMT/data/Hansard/Testing/Task5.f
+
+Trained on : 1000 sentences
+Average accuracy: 0.175899
+
+
+
+Trained on : 10000 sentences
+Average accuracy: 0.213719

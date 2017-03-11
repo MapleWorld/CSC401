@@ -1,0 +1,19 @@
+
+            English     French
+MLE         13.7340     13.5203
+d = 0.2     70.8162     74.9970
+d = 0.4     89.0490     96.5957
+d = 0.6    103.8271     114.3645
+d = 0.8    116.7970     130.1405
+d = 1.0    128.6006     144.6300
+        
+This experiments show that MLE has the lowest perplexity, and hence, MLE gives the best language model.
+
+For smoothing, the smaller the delta value gets, the lower the perlexity becomes.
+
+This shows that additonal delta-smoothing introduces noise, and larger the delta value is, the noisier the distrubution is, and less accurate the result.
+
+
+Theoretically, delta smoothing adds unknown probability distribution from MLE and assigning it to things that we've never seen before to produce a uniform distrubution. 
+This means that things that we have actually seen before will become less likely to get match, depending on the delta value. 
+This explains why the probability estimate given by MLE are always higher than add-delta smoothing.

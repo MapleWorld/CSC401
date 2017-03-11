@@ -1,1 +1,0 @@
-submit -N a1 csc401h twtt.py buildarff.py test.twt test.arff ./output/3.1/3.1output.txt ./output/3.2/3.2output/txt ./output/3.3/3.3output.txt ./output/3.4/3.4output.txt
