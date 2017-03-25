@@ -5,7 +5,7 @@
 %  Task 5.
 
 % some of your definitions
-trainDir     = './Training';%'/u/cs401/A2_SMT/data/Hansard/Training/';
+trainDir     = './Training/';%'/u/cs401/A2_SMT/data/Hansard/Training/';
 testDir      = './Testing/Task5';%'/u/cs401/A2_SMT/data/Hansard/Testing/Task5';
 fn_LME       = './part5_LM_e.mat';
 fn_LMF       = './part5_LM_f.mat';
@@ -17,11 +17,11 @@ numSentences = 1000;
 sizes        = {1000};%{1000, 10000, 15000, 30000, 100000};
 
 % Train your language models. This is task 2 which makes use of task 1
-%LME = lm_train( trainDir, 'e', fn_LME );
+LME = lm_train( trainDir, 'e', fn_LME );
 %LMF = lm_train( trainDir, 'f', fn_LMF );
 
-LME = load(fn_LME, 'LM', '-mat');
-LME = LME.LM;
+%LME = load(fn_LME, 'LM', '-mat');
+%LME = LME.LM;
 %LMF = load(fn_LMF, 'LM', '-mat');
 
 % Train your alignment model of French, given English
