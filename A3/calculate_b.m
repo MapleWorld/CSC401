@@ -1,41 +1,55 @@
+%{
+Log rule
+log(a/b) = log(a) - log(b)
+log(ab) = lob(a) + log(b)
+
+b = numerator / denominator
+log(b) = log(numerator / denominator)
+log(b) = log(numerator) - log(denominator)
+
+numerator = exp(-1/2 sum ((x - mean)^2 / cov))
+log(numerator) = -1/2 sum ((x - mean)^2 / cov)
+
+denominator = (2*pi)^(d/2) * (prod cov)^(1/2)
+log(denominator) = d/2 * (2 * pi) + (1/2) * (sum log(cov))
+
+%}
 function b = calculate_b(X, theta, M)
     % X: T x D
-    X_size = size(X);
-    T = X_size(1);
+
+    % T is number of training cases
+    T = size(X, 1);
+    % D is number of dimensions
+    D = size(X, 2);
     
-    log_b = zeros(T, M);
-    
-    for m=1:M
+    % First compute log of numerator
+    num = zeros(T, M);
+    for i=1:D
         % Compute b per dimension
-        mu_m = theta.means(:, m); % D x 1
-        rep_mu_m = repmat(mu_m.', T, 1); % T x D
+        data_m = X(:,i);
+        rep_data_m = repmat(data_m, 1, M);
         
-        cov_m = diag(theta.cov(:, :, m)); % D x 1
-        rep_cov_m = repmat(cov_m.', T, 1); % T x D
+        mu_m = theta.means(i, :); % 
+        rep_mu_m = repmat(mu_m, T, 1); % 
         
-        log_b(:, m) = logNormPdf(X, rep_mu_m, rep_cov_m);
+        cov_m = theta.cov(i, i, :); % 
+        rep_cov_m = repmat(cov_m, 1, T, 1); % 
+        
+        num = num + (rep_data_m - rep_mu_m).^2 ./ squeeze(rep_cov_m);
     end
     
+    num = -1/2 * num;
+
+    % More compact/easy form to use covs in
+    comp_covs = zeros(D,M);
+    for i=1:M
+        comp_covs(:, i) = diag(theta.cov(:, :, i));
+    end
+
+    % Log of denominator
+    den = D/2*log(2*pi) + 1/2*repmat(sum(log(comp_covs), 1), T, 1);
+
+    % Compute log(b)
+    log_b = num - den;
     b = exp(log_b); % T x M
 end
-
-function [log_b] = logNormPdf(X, mu, cov)
-    % X  : T x D
-    % mu : T x D (rep from 1 x D)
-    % cov: T x D (rep from 1 x D)
-    
-    x_minus_mu = X - mu; % T x D
-    numerator_per_d = (x_minus_mu.^2) ./ cov; % T x D
-    log_b_per_t = -0.5 * (numerator_per_d + log(2 * pi * cov)); % T x D
-    
-    % Sum across all dimensions since we assume independence
-    log_b = sum(log_b_per_t, 2); % T x 1
-end
-
-
-
-
-
-
-
-

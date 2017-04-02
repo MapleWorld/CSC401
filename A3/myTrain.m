@@ -1,95 +1,139 @@
-dir_train   = './Training';
-M           = 8;
-Q           = 3;
-initType    = 'kmeans';
-max_iter    = 15;
-output_file = './hmm';
-bnt_path    = './bnt';
+warning('off', 'MATLAB:nargchk:deprecated')
+% For mk_dbn function
+% Have to reverse the order of strsplit() after adding BNT package
+%addpath('/u/cs401/A3_ASR/code');
+%bntPath = '/u/cs401/A3_ASR/code/FullBNT-1.0.7';
+bntPath = './bnt';
+addpath(genpath(bntPath));
 
-% 1. Load phoneme data
+%dir_train     = '/u/cs401/speechdata/Training';
+dir_train   = './Training';
+
+% The directory of where the trained data for phonemes will be store
+dir_hmm = './hmms';
+mkdir(dir_hmm);
+
+% Load phoneme data
 main_folders = dir(dir_train);
+
 % Length = 3 to skip . and .. directory
 main_folders = main_folders(3:end);
-   
+
+% Create an empty struct for phonemes
 phoneme_struct = struct();
+
+% Dimensions of the mfcc data
+D = 14;
 
 % For each speaker
 for i=1:length(main_folders)
-    sub_folder_path = strcat(dir_train, '/', main_folders(i).name);
-    utterances_folder = dir([sub_folder_path, filesep, '*', '.mfcc']);
-
+    sub_dir_path = strcat(dir_train, '/', main_folders(i).name);
+    
+    % Load each utterance folder for *.mfcc and *.phn files
+    
+    phn_dir = dir( [ sub_dir_path, filesep, '*', 'phn' ] );
+    mfcc_dir = dir( [ sub_dir_path, filesep, '*', 'mfcc' ] );
+    
     % For each utterance folder
-    for j=1:length(utterances_folder)
-        file_name = utterances_folder(j).name;
-        split = strsplit(file_name, '.');
-        % Re-name file name from *.mfcc to *.phn
-        split{2} = 'phn';
-        phn_file = strjoin(split, '.');
+    for j=1:length(mfcc_dir)
         
-        %disp(split);
-        %disp(file_name);
-        %disp(phn_file);
-
+        file_name_phn = phn_dir(j).name;
+        file_name_mfcc = mfcc_dir(j).name;
+        
         % Load mfcc data
-        mfcc_data = load([sub_folder_path, filesep, file_name]);
-        mfcc_rows = size(mfcc_data, 1);
-
+        mfcc_data = load([sub_dir_path, filesep, file_name_mfcc]);
+        
+        % Resize mfcc data's dimensionaility
+        mfcc_data = mfcc_data(1:end,1:D);
+        
         % Read phoneme data for this speaker's utterance
-        phoneme_transcription = textread([sub_folder_path, filesep, phn_file], '%s', 'delimiter', '\n');
-        disp(phoneme_transcription);
+        phoneme_transcription = textread([sub_dir_path, filesep, file_name_phn], '%s', 'delimiter', '\n');
         
         % For each phoneme in utterance
         for k=1:length(phoneme_transcription)
-            phoneme_data  = strsplit(phoneme_transcription{k}, ' ');
-            disp(phoneme_data);
+            % Read phoneme data line by line
+            % Separate out the start, end, and phoneme
+            [phoneme_start, phoneme_end, phoneme]  = strread(phoneme_transcription{k}, '%d %d %s', 'delimiter', ' ');
+            phoneme = char(phoneme);
             
             % Manipulate indices such that
             % 0   - 256 maps to [1, 2]
             % 256 - 512 maps to [3, 4]
-            phoneme_start = str2num(phoneme_data{1});
-            phoneme_start = (phoneme_start / 128) + 1;
-            phoneme_end   = str2num(phoneme_data{2});
-            phoneme_end   = min(phoneme_end / 128, mfcc_rows);
+            % The MFCC filtered with a windows of 256 consecutive samples
+            % of the speech waveforms, so each frame represents 256 = 16000 = 0:016 seconds of speech.
+            % These windows are moved in increments of 128 samples
             
-            phoneme       = phoneme_data{3};
+            % The start index can't be less than 0
+            % The end index can't exceed the number row of the matrix
+            phoneme_start = max(1, round(phoneme_start / 128));
+            phoneme_end   = min(phoneme_end / 128, size(mfcc_data, 1));
+            
+            % h# Marker for start and end
             if strcmp(phoneme, 'h#')
                 phoneme = 'sil';
             end
             
+            % Slice the row from index start to end
+            % Each row contains all its column
+            % Basically, slice the data horizontally
             mfcc_slice = mfcc_data(phoneme_start:phoneme_end, :);
             
-            % If we haven't seen this phoneme yet, create an empty
-            % cell array
+            % Create an empty structure if never seen this phoneme before
             if ~isfield(phoneme_struct, phoneme)
                 phoneme_struct.(phoneme) = cell(0);
             end
             
-            % Take the relevant mfcc slice, and append to cell array for
-            % this phoneme
-            num_phn_sequences = length(phoneme_struct.(phoneme));
-            phoneme_struct.(phoneme){num_phn_sequences + 1} = mfcc_slice';
-            break;
+            % Add relevant mfcc slice of this phoneme to th array
+            num = length(phoneme_struct.(phoneme)) + 1;
+            
+            % Add the inverse of the mfcc data matrix
+            phoneme_struct.(phoneme){num} = mfcc_slice';
+            
+            %break;
         end
-        break;
+        %break;
     end
-    break;
+    %break;
 end
 
-%addpath(genpath(bnt_path));
+
+% [HMM] = initHMM( data, M, Q, initType )
+% M : The number of Gaussian mixture components per state (default 8)
+% Q : The number of hidden states (default 3)
+% initType : 'rnd' or 'kmeans' (default 'kmeans')
+M = 8;
+Q = 3;
+initType = 'kmeans';
+
+% [HMM,LL] = trainHMM( HMM, data, max_iter )
+% max_iter : The maximum iterations of EM
+max_iter = 15;
+
+% The amount of training data used. (proportion)
+P = 1;
 
 % Init and train an HMM for each of the unique phonemes seen
-%{
-phonemes_seen = fields(phoneme_struct);
-num_phonemes_seen = length(phonemes_seen);
-for i_phn=1:num_phonemes_seen
-    curr_phn_name = phonemes_seen{i_phn};
-    data = phoneme_struct.(curr_phn_name);
+phoneme_list = fields(phoneme_struct);
+
+% Train each phoneme
+for i=1:length(phoneme_list)
+    phoneme_name = phoneme_list{i};
+    data = phoneme_struct.(phoneme_name);
+    amount_of_training_data = ceil(P * length(phoneme_struct.(phoneme_name)));
+    data = data(1:amount_of_training_data);
     
     HMM = initHMM(data, M, Q, initType);
     [HMM, LL] = trainHMM(HMM, data, max_iter);
+    folder_name = strcat(dir_hmm, filesep, 'M', num2str(M), 'Q', num2str(Q),'P', num2str(P * 100), 'D', num2str(D));
     
-    save([output_file, filesep, 'hmm_', curr_phn_name], 'HMM', '-mat');
+    % Create the folder if it doesn't exist already.
+    if ~exist(folder_name, 'dir')
+        mkdir(folder_name);
+    end
+    
+    file_path = strcat(folder_name, filesep, phoneme_name);
+    save(file_path, 'HMM', '-mat');
 end
 
-rmpath(genpath(bnt_path));
-%}
+%rmpath(genpath('/u/cs401/A3_ASR/code/FullBNT-1.0.7'));
+rmpath(genpath(bntPath));

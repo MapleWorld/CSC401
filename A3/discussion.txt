@@ -1,0 +1,110 @@
+===============================
+SECTION 2.3
+
+Experiment with the settings of M and e. For example, what happens to classification accuracy as the
+number of components decreases? What about when the number of possible speakers, S, decreases? You
+will be marked on the detail with which you empirically answer these questions and whether you can devise
+one or more additional valid experiments of this type.
+
+Additionally, your report should include short hypothetical answers to the following questions:
+* How might you improve the classification accuracy of the Gaussian mixtures, without adding more
+training data?
+
+* When would your classifier decide that a given test utterance comes from none of the trained speaker
+models, and how would your classifier come to this decision?
+
+* Can you think of some alternative methods for doing speaker identification that don't use Gaussian mixtures?
+
+
+===============================
+SECTION 3.1
+
+Phoneme: sil    # correct: 53    # total: 60    accuracy: 0.883 
+Phoneme: n      # correct: 33    # total: 46    accuracy: 0.717 
+Phoneme: aw     # correct: 0     # total: 4     accuracy: 0.000 
+Phoneme: hv     # correct: 3     # total: 5     accuracy: 0.600 
+Phoneme: ih     # correct: 8     # total: 34    accuracy: 0.235 
+Phoneme: r      # correct: 9     # total: 34    accuracy: 0.264 
+Phoneme: ix     # correct: 14    # total: 44    accuracy: 0.318 
+Phoneme: z      # correct: 16    # total: 30    accuracy: 0.533 
+Phoneme: tcl    # correct: 21    # total: 40    accuracy: 0.525 
+Phoneme: t      # correct: 15    # total: 28    accuracy: 0.535 
+Phoneme: uw     # correct: 1     # total: 10    accuracy: 0.100 
+Phoneme: l      # correct: 31    # total: 46    accuracy: 0.673 
+Phoneme: ey     # correct: 4     # total: 14    accuracy: 0.285 
+Phoneme: m      # correct: 21    # total: 31    accuracy: 0.677 
+Phoneme: aa     # correct: 5     # total: 13    accuracy: 0.384 
+Phoneme: v      # correct: 7     # total: 15    accuracy: 0.466 
+Phoneme: el     # correct: 0     # total: 9     accuracy: 0.000 
+Phoneme: d      # correct: 7     # total: 29    accuracy: 0.241 
+Phoneme: ao     # correct: 4     # total: 12    accuracy: 0.333 
+Phoneme: q      # correct: 15    # total: 28    accuracy: 0.535 
+Phoneme: eh     # correct: 7     # total: 30    accuracy: 0.233 
+Phoneme: iy     # correct: 22    # total: 43    accuracy: 0.511 
+Phoneme: dx     # correct: 1     # total: 9     accuracy: 0.111 
+Phoneme: axr    # correct: 3     # total: 10    accuracy: 0.300 
+Phoneme: ay     # correct: 7     # total: 15    accuracy: 0.466 
+Phoneme: f      # correct: 11    # total: 15    accuracy: 0.733 
+Phoneme: er     # correct: 3     # total: 6     accuracy: 0.500 
+Phoneme: s      # correct: 39    # total: 43    accuracy: 0.906 
+Phoneme: pau    # correct: 0     # total: 6     accuracy: 0.000 
+Phoneme: dh     # correct: 4     # total: 22    accuracy: 0.181 
+Phoneme: ch     # correct: 0     # total: 7     accuracy: 0.000 
+Phoneme: dcl    # correct: 17    # total: 33    accuracy: 0.515 
+Phoneme: jh     # correct: 1     # total: 6     accuracy: 0.166 
+Phoneme: en     # correct: 0     # total: 5     accuracy: 0.000 
+Phoneme: ax     # correct: 4     # total: 27    accuracy: 0.148 
+Phoneme: pcl    # correct: 3     # total: 12    accuracy: 0.250 
+Phoneme: p      # correct: 5     # total: 12    accuracy: 0.416 
+Phoneme: epi    # correct: 2     # total: 16    accuracy: 0.125 
+Phoneme: ah     # correct: 3     # total: 17    accuracy: 0.176 
+Phoneme: w      # correct: 10    # total: 25    accuracy: 0.400 
+Phoneme: uh     # correct: 0     # total: 5     accuracy: 0.000 
+Phoneme: ow     # correct: 6     # total: 13    accuracy: 0.461 
+Phoneme: hh     # correct: 0     # total: 3     accuracy: 0.000 
+Phoneme: ae     # correct: 22    # total: 30    accuracy: 0.733 
+Phoneme: kcl    # correct: 23    # total: 35    accuracy: 0.657 
+Phoneme: k      # correct: 21    # total: 28    accuracy: 0.750 
+Phoneme: oy     # correct: 0     # total: 6     accuracy: 0.000 
+Phoneme: gcl    # correct: 3     # total: 10    accuracy: 0.300 
+Phoneme: g      # correct: 1     # total: 8     accuracy: 0.125 
+Phoneme: sh     # correct: 5     # total: 8     accuracy: 0.625 
+Phoneme: bcl    # correct: 5     # total: 10    accuracy: 0.500 
+Phoneme: b      # correct: 3     # total: 14    accuracy: 0.214 
+Phoneme: ng     # correct: 0     # total: 6     accuracy: 0.000 
+Phoneme: ux     # correct: 1     # total: 11    accuracy: 0.090 
+Phoneme: y      # correct: 2     # total: 4     accuracy: 0.500 
+Phoneme: th     # correct: 0     # total: 6     accuracy: 0.000 
+Phoneme: nx     # correct: 0     # total: 7     accuracy: 0.000 
+Phoneme: em     # correct: 0     # total: 1     accuracy: 0.000 
+
+Accuracy for the default case (M = 8; Q = 3; Proportion of data = 100%; D = 14) is 0.457117 
+
+==========================================================================
+SECTION 3.2
+
+M       Q       Proportion of data(%)      D       Accuracy
+_____________________________________________________________
+
+8       3                        30 %      14      0.222628 
+8       3                        60 %      14      0.387774 
+8       5                        30 %      14      0.192518 
+8       5                        60 %      14      0.354927 
+
+8       3                        30 %      7       0.294708 
+8       3                        60 %      7       0.355839 
+8       5                        30 %      7       0.267336 
+8       5                        60 %      7       0.364051 
+
+4       3                        30 %      14      0.291058 
+4       3                        60 %      14      0.421533 
+4       5                        30 %      14      0.263686 
+4       5                        60 %      14      0.415146 
+
+4       3                        30 %      7       0.312956 
+4       3                        60 %      7       0.388686 
+4       5                        30 %      7       0.292883 
+4       5                        60 %      7       0.366788 
+
+==========================================================================
+SECTION 3.3

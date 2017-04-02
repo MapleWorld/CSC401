@@ -1,0 +1,17 @@
+File Name: ./hmms/M8Q3P60D14 Percent: 0.387774 
+File Name: ./hmms/M4Q3P30D14 Percent: 0.291058 
+File Name: ./hmms/M4Q3P60D14 Percent: 0.421533 
+File Name: ./hmms/M4Q5P30D14 Percent: 0.263686 
+File Name: ./hmms/M4Q5P60D14 Percent: 0.415146 
+File Name: ./hmms/M8Q3P30D14 Percent: 0.222628 
+File Name: ./hmms/M8Q5P30D14 Percent: 0.192518 
+File Name: ./hmms/M8Q5P60D14 Percent: 0.354927 
+
+File Name: ./hmms/M4Q3P60D7 Percent: 0.388686 
+File Name: ./hmms/M4Q3P30D7 Percent: 0.312956 
+File Name: ./hmms/M4Q5P60D7 Percent: 0.366788 
+File Name: ./hmms/M4Q5P30D7 Percent: 0.292883 
+File Name: ./hmms/M8Q3P30D7 Percent: 0.294708 
+File Name: ./hmms/M8Q3P60D7 Percent: 0.355839 
+File Name: ./hmms/M8Q5P30D7 Percent: 0.267336 
+File Name: ./hmms/M8Q5P60D7 Percent: 0.364051 

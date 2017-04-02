@@ -1,0 +1,63 @@
+Subject: [CSC401/2511] Assignment 1 marks
+
+Dear yeou,
+
+This is an automatically generated email. Your rubric for assignment 1 is as follows.
+
+--== PREPROCESSING ==--
+
+        test.twt exists: 1      
+        test.twt reproducable: 2        
+        HTML characters replaced: 1     
+        HTML tags deleted: 2    
+        URLs deleted: 2.4       Does not consider urls without www or http
+        Basic tokenization: 0.9 Does not tokenize multiple punctuation. Separates periods from abbreviations. Does not
+consider numbers.
+        Ellipsis/Dash handing: 2        
+        Contractions: 1 Does not handle various contractions.
+        Sentence breaks: 0      Unexpected behavior. Does not meet spec. Does not consider basic punct (.!?) eos.
+Generic treatment of quotes and ellipsis.
+        Delimitation: 0 Unexpected behavior. Does not meet spec.
+        Empty tweets: 0 Unexpected behavior. Does not meet spec.
+        Tagging: 0      Unexpected behavior (crashes).
+        "Clear well-documented": 2    
+        
+--== FEATURE SELECTION ==--
+
+        test.arff exists: 1     
+        test.arff reproducable: 0       
+        Counts words: 1.333333333       miscounts [:;]. miscounts second person pronouns (or capitalization). 
+        Counts tags: 1.6        miscounts common nouns. 
+        Counts future: 0.727272727      miscounts shall. miscounts negation with won't. miscounts future
+interrogativeCOMMA negative with won't. 
+        Counts slang: 0.777777778       
+        Counts upper: 0 cannot count basic uppercase words. miscounts single letter uppercase. miscounts cases with
+symbols. 
+        Counts sentence length: 0.75    cannot handle floats. 
+        Counts token length: 1  
+        Optional class names: 1 
+        Arff loads into WEKA: 3 
+        Modularity: 1   
+        Efficiency: 1   
+
+--== CLASSIFICATION ==--
+
+        3.1output.txt: 1        
+        3.2output.txt: 1        
+        3.3output.txt: 1        
+        3.4output.txt: 1        
+        3.1 accuracy: 2 
+        3.1 correct choice: 1   accuracy for other classifiers is not reported
+        3.2 comparison: 2       
+        3.2 accuracy: 2 
+        3.2 discuss shape of accuracy/N curve: 1        The explanation is not complete or has inaccuracies
+        3.3 comparison: 2       
+        3.3 features shown: 2   
+        3.3 explanation: 2      
+        3.4 implementation: 2   
+        3.4 recall: 1   The statistics were reported only for one classifier
+        3.4 precision: 1        The statistics were reported only for one classifier
+        3.4 stats: 2    
+        Command lines: 1        
+        Clarity: 1      
+TOTAL: 53.48838384/75

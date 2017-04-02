@@ -1,0 +1,30 @@
+This is an automatically generated email. Your rubric for assignment 2 is as follows.
+
+--== Task 1 ==--
+
+        Preprocessing /5: 0     
+
+--== Task 2 ==--
+
+        Auto tester /5: 5       
+        General correctness of the code /10: 10 
+
+--== Task 3 ==--
+
+        Auto tester /5: 5       
+        General correctness /5: 5       
+        Report /10: 10  
+
+--== Task 4 ==--
+
+        Initialization /4: 0    
+        Alignment calculation /6: 0     
+        General correctness /15: 10     Incorrect init and calculations
+
+--== Task 5 ==--
+
+        General correctness /5: 2       Didn't use BLEU
+        Report Discussion /3: 3 
+        Report results /2: 1    "Results differniated by ""n"" missing."
+TOTAL: 51/75
+

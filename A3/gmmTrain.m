@@ -24,7 +24,7 @@ function gmms = gmmTrain( dir_train, max_iter, epsilon, M )
     
     % Stack the lines vectors for every speaker and train every single
     % speaker against all other speakers
-    for i=1:3 %length(main_folders)
+    for i=1:length(main_folders)
         sub_folder_path = strcat(dir_train, '/', main_folders(i).name);
         utterances_folder = dir([sub_folder_path, filesep, '*', '.mfcc']);
 
@@ -100,12 +100,10 @@ function theta = train(X, max_iter, epsilon, M)
     while i < max_iter && improvement >= epsilon
         
     %   L := ComputeLikelihood (X, theta)
-        [L, p_m_given_x] = computeLikelihood(X, theta, M);
-        
-        disp(L);
-        disp(size(p_m_given_x));
+        [L, prob] = computeLikelihood(X, theta, M);
+
     %   theta := UpdateParameters (theta, X, L) ; 
-        theta = updateParameters(theta, X, p_m_given_x, M);
+        theta = updateParameters(theta, X, prob, M);
         
     %   improvement := L - prev_L
         improvement = L - prev_L;
@@ -122,54 +120,55 @@ function theta = train(X, max_iter, epsilon, M)
 end
 
 % Input parameter X = data
-function [L, p_m_given_x] = computeLikelihood(X, theta, M)
+function [L, prob] = computeLikelihood(X, theta, M)
     % X: T x D
-    
-    X_size = size(X);
-    T = X_size(1);
+    % T is number of training cases
+    T = size(X, 1);
     
     % wb
-    b = calculate_b_test(X, theta, M); % T x M
+    b = calculate_b(X, theta, M); % T x M
+    
+    % Make T copies of theta.weights vertically
     rep_w = repmat(theta.weights, T, 1); % T x M
-    %disp(size(rep_w));
     w_b = rep_w .* b; % T x M
     
     % sum(wb)
     sum_w_b = b * theta.weights'; % T x 1
+    % Make T copies of sum_w_b horizontally
     rep_sum_w_b = repmat(sum_w_b, 1, M); % T x M
     
-    % Log Likelihood = sum(log(sum(wb))
+    % Log Likelihood = sum(log(sum(w_b))
     L = sum(log(sum_w_b), 1); % 1 x 1
     
-    p_m_given_x = w_b ./ rep_sum_w_b; % T x M
+    prob = w_b ./ rep_sum_w_b; % T x M
 end
 
-function theta = updateParameters(theta, X, p_m_given_x, M)
+function theta = updateParameters(theta, X, prob, M)
     % X: T x D
     % p_m_given_x: T x M
     
-    X_size = size(X);
-    T = X_size(1);
-    D = X_size(2);
+    % T is number of training cases
+    T = size(X, 1);
+    % D is number of dimensions
+    D = size(X, 2);
 
     % Weights
-    sum_p = sum(p_m_given_x, 1); % 1 x M
+    sum_p = sum(prob, 1); % 1 x M
     theta.weights = sum_p ./ T;
     
     % Means    
     rep_sum_p = repmat(sum_p, D, 1); % D x M
-    sum_p_X = X' * p_m_given_x; % D x M
+    sum_p_X = X' * prob; % D x M
     theta.means = sum_p_X ./ rep_sum_p;
     
     % Variance
     mu_squared = theta.means .* theta.means; % D x M
     
     X_squared = X .* X; % T x D
-    sum_p_X_squared = X_squared' * p_m_given_x; % D x M
+    sum_p_X_squared = X_squared' * prob; % D x M
     
     E_X_squared = sum_p_X_squared ./ rep_sum_p; % D x M
     var = E_X_squared - mu_squared; % D x M
-    assert(0 == any(any(var < 0)))
 
     for m=1:M
         theta.cov(:, :, m) = diag(var(:, m));
