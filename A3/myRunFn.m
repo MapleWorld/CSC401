@@ -7,7 +7,8 @@ function myRunFn(dir_hmm, D)
     % Have to reverse the order of strsplit() after adding BNT package
     %addpath('/u/cs401/A3_ASR/code');
     %addpath(genpath('/u/cs401/A3_ASR/code/FullBNT-1.0.7'));
-    addpath(genpath('./bnt'));
+    bntPath = './bnt';
+    addpath(genpath(bntPath));
 
     % The directory of where the testing data are located
     %dir_test     = '/u/cs401/speechdata/Testing';
@@ -126,8 +127,7 @@ function myRunFn(dir_hmm, D)
     % Write to file
     writeToFile(dir_hmm, percent_correct);
     
-    %rmpath(genpath('/u/cs401/A3_ASR/code/FullBNT-1.0.7'));
-    rmpath(genpath('./bnt'));
+    rmpath(genpath(bntPath));
 end
 
 function writeToFile(dir_hmm, percent_correct)

@@ -18,9 +18,10 @@ function [SE IE DE LEV_DIST] =Levenshtein(hypothesis,annotation_dir)
     SE = 0;
     IE = 0;
     DE = 0;
+    
     num_reference_words = 0;
 
-    for i=1:1%length(hyp_file)
+    for i=1:length(hyp_file)
         ref_file_name = ['unkn_', int2str(i), '.txt'];
         ref_file = textread([annotation_dir, filesep, ref_file_name], '%s', 'delimiter', '\n');
 
@@ -31,21 +32,23 @@ function [SE IE DE LEV_DIST] =Levenshtein(hypothesis,annotation_dir)
         % The first two are BEGINE and END index
         ref_text = ref_word_list(3:end);
         hyp_text = hyp_word_list(3:end);
-
+    
+        % # Reference words
         num_reference_words = num_reference_words + length(ref_text);
         
         fprintf('Reference : %s\n',  strjoin(ref_text, ' '));
         fprintf('Hypothesis: %s\n', strjoin(hyp_text, ' '));
         
-        %[se_toAdd, ie_toAdd, de_toAdd] = compute_levenshtein(hyp_sent, ref_sent);
-        %fprintf(output_file, 'SE: %f\n', se_toAdd / length(ref_text));
-        %fprintf(output_file, 'IE: %f\n', ie_toAdd / length(ref_text));
-        %fprintf(output_file, 'DE: %f\n\n', de_toAdd / length(ref_text));
-        %fprintf(output_file, 'Total: %f\n\n', (se_toAdd + ie_toAdd + de_toAdd) / length(ref_text));
+        [SE_add, IE_add, DE_add] = compute_levenshtein(hyp_text, ref_text);
         
-        %SE = SE + se_toAdd;
-        %IE = IE + ie_toAdd;
-        %DE = DE + de_toAdd;
+        fprintf('SE: %f\n', SE_add / length(ref_text));
+        fprintf('IE: %f\n', IE_add / length(ref_text));
+        fprintf('DE: %f\n', DE_add / length(ref_text));
+        fprintf('Total: %f\n\n', (SE_add + IE_add + DE_add) / length(ref_text));
+        
+        SE = SE + SE_add;
+        IE = IE + IE_add;
+        DE = DE + DE_add;
     end
     
     SE = SE / num_reference_words;
@@ -54,8 +57,9 @@ function [SE IE DE LEV_DIST] =Levenshtein(hypothesis,annotation_dir)
     
     LEV_DIST = SE + IE + DE;
     
-    %disp(SE);
-    %disp(IE);
-    %disp(DE);
-    %disp(LEV_DIST);
+    fprintf('Final SE: %f\n', SE);
+    fprintf('Final IE: %f\n', IE);
+    fprintf('Final DE: %f\n\n', DE);
+    fprintf('Final LEV DIST: %f\n\n', LEV_DIST);
+   
 end

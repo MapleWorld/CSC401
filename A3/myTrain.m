@@ -135,5 +135,4 @@ for i=1:length(phoneme_list)
     save(file_path, 'HMM', '-mat');
 end
 
-%rmpath(genpath('/u/cs401/A3_ASR/code/FullBNT-1.0.7'));
 rmpath(genpath(bntPath));

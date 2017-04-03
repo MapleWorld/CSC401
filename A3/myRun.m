@@ -3,7 +3,8 @@ warning('off', 'MATLAB:nargchk:deprecated')
 % Have to reverse the order of strsplit() after adding BNT package
 %addpath('/u/cs401/A3_ASR/code');
 %addpath(genpath('/u/cs401/A3_ASR/code/FullBNT-1.0.7'));
-addpath(genpath('./bnt'));
+bntPath = './bnt';
+addpath(genpath(bntPath));
 
 % The directory of where the trained data for phonemes are located
 dir_hmm     = './hmms';
@@ -121,5 +122,4 @@ end
 percent_correct = correct / total;
 fprintf('Final accuracy of classificaiton: %f \n', percent_correct);
 
-%rmpath(genpath('/u/cs401/A3_ASR/code/FullBNT-1.0.7'));
-rmpath(genpath('./bnt'));
+rmpath(genpath(bntPath));

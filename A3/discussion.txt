@@ -78,12 +78,22 @@ Phoneme: th     # correct: 0     # total: 6     accuracy: 0.000
 Phoneme: nx     # correct: 0     # total: 7     accuracy: 0.000 
 Phoneme: em     # correct: 0     # total: 1     accuracy: 0.000 
 
-Accuracy for the default case (M = 8; Q = 3; Proportion of data = 100%; D = 14) is 0.457117 
+M = Number of mixture
+Q = Number of hidden state
+P = Proportion of data(%)
+D = Dimensionaility
+
+Accuracy for the default case (M = 8; Q = 3; P = 100%; D = 14) is 0.457117 
 
 ==========================================================================
 SECTION 3.2
 
-M       Q       Proportion of data(%)      D       Accuracy
+M = Number of mixture
+Q = Number of hidden state
+P = Proportion of data(%)
+D = Dimensionaility
+
+M       Q                           P      D       Accuracy
 _____________________________________________________________
 
 8       3                        30 %      14      0.222628 
@@ -106,5 +116,248 @@ _____________________________________________________________
 4       5                        30 %      7       0.292883 
 4       5                        60 %      7       0.366788 
 
+(M) Reducing the number of mixtures per state (M) improves the accuracy rate by about 3% - 8%.
+
+Probably because the model starts to overfit the training data as the number of mixtures increase,
+thus, lowering the accuracy rate. 
+
+(Q) Increasing the number of states (Q) from 3 to 5 decreases the accuracy rate for about 1% - 3%.
+
+This shows that 3 hidden states is the ideal number of state for the given model and training data available.
+Any increase in hidden states result in overfit of the training data.
+
+(P) The proportion of the training data for each phoneme is set to 30% and 60%.
+Increasing the training data prportion has the greatest impact and increases 
+on the accuracy rate for all cases, showing an increase of 6% - 16%.
+
+This is mostly due to the fact that there are more data available for training, which significantly increases
+the resemblement of the actual phoneme, thus, improving the accuracy rate as the training data proportion increases.
+
+(D) In most of the cases lowering the dimension of data from 14 to 7 increases the accuracy rate.
+
+This is probably because MFCC data's dimensions are highly uncorrelated, thus,
+changing dimensions may or may not have an impact of the performance depending on the case. 
+
+
+In conclusion, I believe we can improve the classification accuracy of model without adding more training data,
+by finding the most optimal parameters for the model that doesn't overfit and underfit the training data.
+
+
 ==========================================================================
 SECTION 3.3
+
+Reference : Now here is truly a marvel.
+Hypothesis: Now here is truly hey marvel.
+SE: 0.166667
+IE: 0.000000
+DE: 0.000000
+Total: 0.166667
+
+Reference : The cartoon features a muskrat and a tadpole.
+Hypothesis: Cat tune features a muskrat and a tadpole.
+SE: 0.250000
+IE: 0.000000
+DE: 0.000000
+Total: 0.250000
+
+Reference : Just let me die in peace.
+Hypothesis: Just let me die in peace.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+Total: 0.000000
+
+Reference : The sculptor looked at him, bugeyed and amazed, angry.
+Hypothesis: The sculptor looked at him, bug I'd and amazed, angry.
+SE: 0.111111
+IE: 0.111111
+DE: 0.000000
+Total: 0.222222
+
+Reference : A flash illumined the trees as a crooked bolt twigged in several directions.
+Hypothesis: A flash illuminated the trees as crook bolt tweaked several directions.
+SE: 0.230769
+IE: 0.000000
+DE: 0.153846
+Total: 0.384615
+
+Reference : This is particularly true in site selection.
+Hypothesis: This is particularly true sight selection.
+SE: 0.142857
+IE: 0.000000
+DE: 0.142857
+Total: 0.285714
+
+Reference : We would lose our export markets and deny ourselves the imports we need.
+Hypothesis: We would lose sour expert markets deny ourselves the imports we need.
+SE: 0.153846
+IE: 0.000000
+DE: 0.076923
+Total: 0.230769
+
+Reference : Count the number of teaspoons of soysauce that you add.
+Hypothesis: Compton number of teaspoons of so he sauce that you add.
+SE: 0.200000
+IE: 0.200000
+DE: 0.100000
+Total: 0.500000
+
+Reference : Finally he asked, do you object to petting?
+Hypothesis: Finally he asked, do you object to petting?
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+Total: 0.000000
+
+Reference : Draw every outer line first, then fill in the interior.
+Hypothesis: Draw every other line first, then fill into interior.
+SE: 0.200000
+IE: 0.000000
+DE: 0.100000
+Total: 0.300000
+
+Reference : Change involves the displacement of form.
+Hypothesis: Change involves the displacement of fawn.
+SE: 0.166667
+IE: 0.000000
+DE: 0.000000
+Total: 0.166667
+
+Reference : To his puzzlement, there suddenly was no haze.
+Hypothesis: Two is puzzle mint, there suddenly was no haze.
+SE: 0.375000
+IE: 0.125000
+DE: 0.000000
+Total: 0.500000
+
+Reference : Don't ask me to carry an oily rag like that.
+Hypothesis: Donna's me to carry oily rag like that.
+SE: 0.100000
+IE: 0.000000
+DE: 0.200000
+Total: 0.300000
+
+Reference : The full moon shone brightly that night.
+Hypothesis: The the full moon shone brightly that night.
+SE: 0.000000
+IE: 0.142857
+DE: 0.000000
+Total: 0.142857
+
+Reference : Tugboats are capable of hauling huge loads.
+Hypothesis: Tugboats are capable falling huge loads.
+SE: 0.142857
+IE: 0.000000
+DE: 0.142857
+Total: 0.285714
+
+Reference : Did dad do academic bidding?
+Hypothesis: Did tatoo academic bidding?
+SE: 0.200000
+IE: 0.000000
+DE: 0.200000
+Total: 0.400000
+
+Reference : She had your dark suit in greasy wash water all year.
+Hypothesis: See add your dark suit and greasy wash water all year.
+SE: 0.272727
+IE: 0.000000
+DE: 0.000000
+Total: 0.272727
+
+Reference : The thick elm forest was nearly overwhelmed by Dutch Elm Disease.
+Hypothesis: The thick forest was nearly over helmed by Dutch Elm Disease.
+SE: 0.090909
+IE: 0.090909
+DE: 0.090909
+Total: 0.272727
+
+Reference : Count the number of teaspoons of soysauce that you add.
+Hypothesis: Cow ten number of teaspoons of soysauce that you add.
+SE: 0.200000
+IE: 0.000000
+DE: 0.000000
+Total: 0.200000
+
+Reference : Norwegian sweaters are made of lamb's wool.
+Hypothesis: Norwegian sweaters are made of lamb's wool.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+Total: 0.000000
+
+Reference : We think differently.
+Hypothesis: We think differently.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+Total: 0.000000
+
+Reference : A toothpaste tube should be squeezed from the bottom.
+Hypothesis: A too pays too should be squeezed from the bottom.
+SE: 0.222222
+IE: 0.111111
+DE: 0.000000
+Total: 0.333333
+
+Reference : Ran away on a black night with a lawful wedded man.
+Hypothesis: Ran away on a black night with an awful wedded man.
+SE: 0.181818
+IE: 0.000000
+DE: 0.000000
+Total: 0.181818
+
+Reference : Don't ask me to carry an oily rag like that.
+Hypothesis: Down ask me to carry an oily rag like that.
+SE: 0.100000
+IE: 0.000000
+DE: 0.000000
+Total: 0.100000
+
+Reference : Don't ask me to carry an oily rag like that.
+Hypothesis: Don't ask me to carry an oily rag like that.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+Total: 0.000000
+
+Reference : Index words and electronic switches may be reserved in the following ways.
+Hypothesis: Index words an electronic switches may be reserved in the following way.
+SE: 0.166667
+IE: 0.000000
+DE: 0.000000
+Total: 0.166667
+
+Reference : The avalanche triggered a minor earthquake.
+Hypothesis: The avalanche triggered minor earth way.
+SE: 0.166667
+IE: 0.166667
+DE: 0.166667
+Total: 0.500000
+
+Reference : Don't ask me to carry an oily rag like that.
+Hypothesis: Donna's me to carry an oily rag like that.
+SE: 0.100000
+IE: 0.000000
+DE: 0.100000
+Total: 0.200000
+
+Reference : The thick elm forest was nearly overwhelmed by Dutch Elm Disease.
+Hypothesis: The thick elm for his was nail he over well bye touch Elm Disease.
+SE: 0.454545
+IE: 0.272727
+DE: 0.000000
+Total: 0.727273
+
+Reference : When all else fails, use force.
+Hypothesis: When hall else fails, use forks.
+SE: 0.333333
+IE: 0.000000
+DE: 0.000000
+Total: 0.333333
+
+Final SE: 0.165385
+Final IE: 0.042308
+Final DE: 0.050000
+
+Final LEV DIST: 0.257692
