@@ -1,20 +1,73 @@
 ===============================
 SECTION 2.3
 
-Experiment with the settings of M and e. For example, what happens to classification accuracy as the
-number of components decreases? What about when the number of possible speakers, S, decreases? You
-will be marked on the detail with which you empirically answer these questions and whether you can devise
-one or more additional valid experiments of this type.
+1. Different values for M with max_iter = 5 and eps = 0.5
 
-Additionally, your report should include short hypothetical answers to the following questions:
-* How might you improve the classification accuracy of the Gaussian mixtures, without adding more
-training data?
+Accuracy with M = 1 is 93.333333
+Accuracy with M = 2 is 86.666667
+Accuracy with M = 3 is 93.333333
+Accuracy with M = 4 is 93.333333
+Accuracy with M = 5 is 100.000000
+Accuracy with M = 6 is 100.000000
+Accuracy with M = 7 is 100.000000
+Accuracy with M = 8 is 100.000000
 
-* When would your classifier decide that a given test utterance comes from none of the trained speaker
-models, and how would your classifier come to this decision?
+The classification accuracy goes down as the number of components decreases.
+However, the accuracy rate fluctuates as it depends alot on the random 
+initialization of the gaussian means.
 
-* Can you think of some alternative methods for doing speaker identification that don't use Gaussian mixtures?
+2. Different values for epsilon with M = 8 and max_iter = 5
 
+Accuracy with epsilon = 0.5 is 100.000000
+Accuracy with epsilon = 1 is 100.000000
+Accuracy with epsilon = 100 is 100.000000
+Accuracy with epsilon = 1000 is 100.000000
+Accuracy with epsilon = 10000 is 93.333333
+Accuracy with epsilon = 100000 is 93.333333
+Accuracy with epsilon = 1000000 is 93.333333
+Accuracy with epsilon = 10000000 is 93.333333
+
+The classification accuracy goes down as epsilon increases.
+However, the accuracy rate only goes down slightly even with very large eplison value.
+This might due to the fact that the model is too simple and converge too quickly, 
+and the decrease in accuracy is probably because not all models can fully converge with the given eplison.
+
+3. Different values for the number of speakers with M = 8, eps = 0.5, and max_iter = 5
+
+Accuracy with num_speakers = 1 is 6.666667
+Accuracy with num_speakers = 5 is 33.333333
+Accuracy with num_speakers = 10 is 66.666667
+Accuracy with num_speakers = 15 is 100.000000
+Accuracy with num_speakers = 20 is 100.000000
+Accuracy with num_speakers = 25 is 100.000000
+Accuracy with num_speakers = 30 is 100.000000
+
+The classification accuracy goes down significantly as the number of speaker decreases.
+This is because the less training data that we have, the less accuracy the Gaussian Mixture Models are,
+because the models simply don't have enough information to match up with the testing data.
+
+1) How might you improve the classification accuracy of the Gaussian mixtures,
+without adding more training data?
+
+We might imrpove the accuracy by relaxing on the assumption that the dimensions 
+of the data are independent, and enables us to use the full covariance matrix 
+for correlations instead of just using the diagonal. The full covariance matrix
+will have a better correlation between feature components.
+
+2) When would your classifier decide that a given test utterance comes from none
+of the trained speaker models, how would your classifier come to this decision?
+
+Set a minimum threshold for the variance of the likelihood, and if the test 
+doesn't converge after several iterations, then we can conclude that the test utterance
+doesn't belong to any of the trained speaker model. 
+
+3) Can you think of some alternative models for doing speaker identification
+that don't use Gaussion mixtures?
+
+Speaker identification methods that don't use Gaussian mixtures are 
+Vector Quantization, Support Vector Machines, Neural Networks 
+using hidden layer(s) with non-linear sigmoid functions, and backward 
+propagation to calculate correlations between the data.
 
 ===============================
 SECTION 3.1

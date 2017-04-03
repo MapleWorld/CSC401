@@ -97,7 +97,7 @@ function theta = train(X, max_iter, epsilon, M)
     improvement = epsilon;
     
     % while i =< MAX ITER and improvement >= epsilon do
-    while i < max_iter && improvement >= epsilon
+    while i <= max_iter && improvement >= epsilon
         
     %   L := ComputeLikelihood (X, theta)
         [L, prob] = computeLikelihood(X, theta, M);
@@ -124,7 +124,6 @@ function [L, prob] = computeLikelihood(X, theta, M)
     % X: T x D
     % T is number of training cases
     T = size(X, 1);
-    
     % wb
     b = calculate_b(X, theta, M); % T x M
     
@@ -144,8 +143,8 @@ function [L, prob] = computeLikelihood(X, theta, M)
 end
 
 function theta = updateParameters(theta, X, prob, M)
-    % X: T x D
-    % p_m_given_x: T x M
+    % X     : T x D
+    % prob  : T x M
     
     % T is number of training cases
     T = size(X, 1);
@@ -153,24 +152,28 @@ function theta = updateParameters(theta, X, prob, M)
     D = size(X, 2);
 
     % Weights
-    sum_p = sum(prob, 1); % 1 x M
-    theta.weights = sum_p ./ T;
+    % Sum of prob / T
+    % 1 x M
+    theta.weights = sum(prob, 1) ./ T;
     
     % Means    
-    rep_sum_p = repmat(sum_p, D, 1); % D x M
-    sum_p_X = X' * prob; % D x M
-    theta.means = sum_p_X ./ rep_sum_p;
+    % Sum of pro * X / sum of prob
+    % Make D copies of sum of prob 
+    mean_numerator = X' * prob; % D x M
+    mean_denominator = repmat(sum(prob, 1), D, 1); % D x M
+    theta.means = mean_numerator ./ mean_denominator;
+    
+    % Covariance
+    X_squared = X.^2; % T x D
+    covariance_numerator = X_squared' * prob; % D x M
+    covariance_denominator = repmat(sum(prob, 1), D, 1); % D x M
+    covariance_fraction = covariance_numerator ./ covariance_denominator; % D x M
     
     % Variance
-    mu_squared = theta.means .* theta.means; % D x M
-    
-    X_squared = X .* X; % T x D
-    sum_p_X_squared = X_squared' * prob; % D x M
-    
-    E_X_squared = sum_p_X_squared ./ rep_sum_p; % D x M
-    var = E_X_squared - mu_squared; % D x M
+    means_squared = theta.means.^2; % D x M
+    covariance = covariance_fraction - means_squared; % D x M
 
     for m=1:M
-        theta.cov(:, :, m) = diag(var(:, m));
+        theta.cov(:, :, m) = diag(covariance(:, m));
     end
 end

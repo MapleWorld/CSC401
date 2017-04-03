@@ -7,7 +7,6 @@ function myTrainFn = myTrainFn(M, Q, P, D)
     warning('off', 'MATLAB:nargchk:deprecated')
     % For mk_dbn function
     % Have to reverse the order of strsplit() after adding BNT package
-    %addpath('/u/cs401/A3_ASR/code');
     %bntPath = '/u/cs401/A3_ASR/code/FullBNT-1.0.7';
     bntPath = './bnt';
     addpath(genpath(bntPath));
