@@ -40,7 +40,7 @@ function b = calculate_b(X, theta, M)
     
     num = -1/2 * num;
 
-    % More compact/easy form to use covs in
+    % Simplifies the covariance matrix
     comp_covs = zeros(D,M);
     for i=1:M
         comp_covs(:, i) = diag(theta.cov(:, :, i));

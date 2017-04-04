@@ -6,7 +6,7 @@ bntPath = './bnt';
 addpath(genpath(bntPath));
 
 % The directory of where the trained data for phonemes are located
-dir_hmm     = './hmms';
+dir_hmm     = './hmms/M8Q3P100D14';
 
 % The directory of where the testing data are located
 %dir_test     = '/u/cs401/speechdata/Testing';

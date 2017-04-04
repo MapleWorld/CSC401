@@ -8,6 +8,9 @@ max_iter       = 5;
 epsilon        = 0.5;
 M              = 8; % By default
 
+% Create the lik directory 
+mkdir(dir_lik);
+
 gmms = gmmTrain(dir_train, max_iter, epsilon, M);
 num_speakers = length(gmms);
 num_utterances = 30;
@@ -63,7 +66,7 @@ for i=1:num_speakers
     end
     
     % Create the file name
-    file_name = [dir_lik, filesep, 'unkn', int2str(i), '.lik'];
+    file_name = [dir_lik, filesep, 'unkn_', int2str(i), '.lik'];
     
     % Open file
     file_output = fopen(file_name, 'w');

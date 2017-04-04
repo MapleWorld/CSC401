@@ -19,8 +19,7 @@ function gmms = gmmTrain( dir_train, max_iter, epsilon, M )
     main_folders = dir(dir_train);
     % Length = 3 to skip . and .. directory
     main_folders = main_folders(3:end);
-    N = length(main_folders);
-    gmms = cell(1, N);
+    gmms = cell(1, length(main_folders));
     
     % Stack the lines vectors for every speaker and train every single
     % speaker against all other speakers
@@ -72,7 +71,7 @@ function theta = initalize(data, M)
     random_matrix = ceil(rand(1, M) * row);
     
     % Randomly select a matrix of size M x row from the vectors
-    % ' inverses the matrix, not sure if inverse is required or not
+    % ' inverses the matrix
     % So means is a matrix of size row x M
     theta.means = data(random_matrix, :)';       
     
